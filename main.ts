@@ -68,7 +68,8 @@ if (problems.length) {
   process.exit(1);
 }
 
-rmSync(out, { recursive: true, force: true });
+mkdirSync(out, { recursive: true });
+for (const name of readdirSync(out)) rmSync(join(out, name), { recursive: true, force: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 cpSync(gameDir, join(out, 'game'), { recursive: true });
 cpSync(shotsDir, join(out, 'screenshots'), { recursive: true });
